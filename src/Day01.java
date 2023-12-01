@@ -1,0 +1,72 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+public class Day01 {
+    public static void main(String[] args) throws IOException {
+        var lines = Files.readAllLines(Paths.get("resources/day01.txt"));
+        
+        System.out.println(part1(lines));
+        System.out.println(part2(lines));
+    }
+    
+    static int part1(List<String> lines) {
+        var regex        = "(\\d)";
+        var patternFirst = Pattern.compile(regex);
+        var patternLast  = Pattern.compile(".*" + regex);
+        
+        return lines.stream().map(line -> {
+            var matchesFirst = patternFirst.matcher(line).results().findFirst().orElseThrow().group(1);
+            var matchesLast  = patternLast.matcher(line).results().findFirst().orElseThrow().group(1);
+            
+            return matchesFirst + matchesLast;
+        }).mapToInt(Integer::parseInt).sum();
+    }
+    
+    static Map<String, String> digitsMap = Map.of(
+            "one",
+            "1",
+            "two",
+            "2",
+            "three",
+            "3",
+            "four",
+            "4",
+            "five",
+            "5",
+            "six",
+            "6",
+            "seven",
+            "7",
+            "eight",
+            "8",
+            "nine",
+            "9"
+    );
+    
+    static int part2(List<String> lines) {
+        var regex        = "(\\d|%s)".formatted(digitsMap.keySet()
+                                                         .stream()
+                                                         .reduce((a, b) -> a + "|" + b)
+                                                         .orElseThrow());
+        var patternFirst = Pattern.compile(regex);
+        var patternLast  = Pattern.compile(".*" + regex);
+        
+        return lines.stream().map(line -> {
+            var matchesFirst = patternFirst.matcher(line).results().findFirst().orElseThrow().group(1);
+            var matchesLast  = patternLast.matcher(line).results().findFirst().orElseThrow().group(1);
+            
+            if (digitsMap.containsKey(matchesFirst)) {
+                matchesFirst = digitsMap.get(matchesFirst);
+            }
+            if (digitsMap.containsKey(matchesLast)) {
+                matchesLast = digitsMap.get(matchesLast);
+            }
+            
+            return matchesFirst + matchesLast;
+        }).mapToInt(Integer::parseInt).sum();
+    }
+}
