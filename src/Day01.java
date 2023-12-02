@@ -7,16 +7,16 @@ import java.util.regex.Pattern;
 
 public class Day01 {
     public static void main(String[] args) throws IOException {
-        var lines = Files.readAllLines(Paths.get("resources/day01.txt"));
+        final var lines = Files.readAllLines(Paths.get("resources/day01.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));
     }
     
     static int part1(List<String> lines) {
-        var regex        = "(\\d)";
-        var patternFirst = Pattern.compile(regex);
-        var patternLast  = Pattern.compile(".*" + regex);
+        final var regex        = "(\\d)";
+        final var patternFirst = Pattern.compile(regex);
+        final var patternLast  = Pattern.compile(".*" + regex);
         
         return lines.stream().map(line -> {
             var matchesFirst = patternFirst.matcher(line).results().findFirst().orElseThrow().group(1);
@@ -48,12 +48,12 @@ public class Day01 {
     );
     
     static int part2(List<String> lines) {
-        var regex        = "(\\d|%s)".formatted(digitsMap.keySet()
+        final var regex        = "(\\d|%s)".formatted(digitsMap.keySet()
                                                          .stream()
                                                          .reduce((a, b) -> a + "|" + b)
                                                          .orElseThrow());
-        var patternFirst = Pattern.compile(regex);
-        var patternLast  = Pattern.compile(".*" + regex);
+        final var patternFirst = Pattern.compile(regex);
+        final var patternLast  = Pattern.compile(".*" + regex);
         
         return lines.stream().map(line -> {
             var matchesFirst = patternFirst.matcher(line).results().findFirst().orElseThrow().group(1);
