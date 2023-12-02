@@ -4,14 +4,14 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Day02 {
-    public static void main(String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException {
         final var lines = Files.readAllLines(Paths.get("resources/day02.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));
     }
     
-    static int part1(List<String> lines) {
+    static int part1(final List<String> lines) {
         final var maxRed   = 12;
         final var maxGreen = 13;
         final var maxBlue  = 14;
@@ -40,7 +40,7 @@ public class Day02 {
         }).sum();
     }
     
-    static int part2(List<String> lines) {
+    static int part2(final List<String> lines) {
         return lines.stream().mapToInt((line) -> {
             final var parts    = line.split(": ");
             var       minRed   = 0;
