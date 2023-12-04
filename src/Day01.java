@@ -6,26 +6,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Day01 {
-    public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day01.txt"));
-        
-        System.out.println(part1(lines));
-        System.out.println(part2(lines));
-    }
-    
-    static int part1(final List<String> lines) {
-        final var regex        = "(\\d)";
-        final var patternFirst = Pattern.compile(regex);
-        final var patternLast  = Pattern.compile(".*" + regex);
-        
-        return lines.stream().map(line -> {
-            final var matchesFirst = patternFirst.matcher(line).results().findFirst().orElseThrow().group(1);
-            final var matchesLast  = patternLast.matcher(line).results().findFirst().orElseThrow().group(1);
-            
-            return matchesFirst + matchesLast;
-        }).mapToInt(Integer::parseInt).sum();
-    }
-    
     static Map<String, String> digitsMap = Map.of(
             "one",
             "1",
@@ -47,11 +27,28 @@ public class Day01 {
             "9"
     );
     
+    public static void main(final String[] args) throws IOException {
+        final var lines = Files.readAllLines(Paths.get("resources/day01.txt"));
+        
+        System.out.println(part1(lines));
+        System.out.println(part2(lines));
+    }
+    
+    static int part1(final List<String> lines) {
+        final var regex        = "(\\d)";
+        final var patternFirst = Pattern.compile(regex);
+        final var patternLast  = Pattern.compile(".*" + regex);
+        
+        return lines.stream().map(line -> {
+            final var matchesFirst = patternFirst.matcher(line).results().findFirst().orElseThrow().group(1);
+            final var matchesLast  = patternLast.matcher(line).results().findFirst().orElseThrow().group(1);
+            
+            return matchesFirst + matchesLast;
+        }).mapToInt(Integer::parseInt).sum();
+    }
+    
     static int part2(final List<String> lines) {
-        final var regex        = "(\\d|%s)".formatted(digitsMap.keySet()
-                                                         .stream()
-                                                         .reduce((a, b) -> a + "|" + b)
-                                                         .orElseThrow());
+        final var regex = "(\\d|%s)".formatted(digitsMap.keySet().stream().reduce((a, b) -> a + "|" + b).orElseThrow());
         final var patternFirst = Pattern.compile(regex);
         final var patternLast  = Pattern.compile(".*" + regex);
         

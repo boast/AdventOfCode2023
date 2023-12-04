@@ -25,8 +25,8 @@ public class Day02 {
                 final var cubes = grab.split(", ");
                 for (final var cube : cubes) {
                     final var cubeParts = cube.split(" ");
-                    final var amount        = Integer.parseInt(cubeParts[0]);
-                    final var color         = cubeParts[1];
+                    final var amount    = Integer.parseInt(cubeParts[0]);
+                    final var color     = cubeParts[1];
                     
                     if (color.equals("red") && amount > maxRed ||
                         color.equals("green") && amount > maxGreen ||
@@ -52,8 +52,8 @@ public class Day02 {
                 final var cubes = grab.split(", ");
                 for (final var cube : cubes) {
                     final var cubeParts = cube.split(" ");
-                    final var amount        = Integer.parseInt(cubeParts[0]);
-                    final var color         = cubeParts[1];
+                    final var amount    = Integer.parseInt(cubeParts[0]);
+                    final var color     = cubeParts[1];
                     
                     switch (color) {
                         case "red" -> minRed = Math.max(minRed, amount);

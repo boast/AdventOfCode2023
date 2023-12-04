@@ -109,6 +109,20 @@ public class Day03 {
         return sb;
     }
     
+    private static Map<Point, Character> buildMap(final List<String> lines) {
+        final var map = new HashMap<Point, Character>();
+        
+        for (int y = 0; y < lines.size(); y++) {
+            final var line = lines.get(y);
+            for (int x = 0; x < line.length(); x++) {
+                final var c = line.charAt(x);
+                map.put(new Point(x, y), c);
+            }
+        }
+        
+        return map;
+    }
+    
     private enum Element {
         NUMBER, SYMBOL, EMPTY;
         
@@ -124,19 +138,5 @@ public class Day03 {
                 return SYMBOL;
             }
         }
-    }
-    
-    private static Map<Point, Character> buildMap(final List<String> lines) {
-        final var map = new HashMap<Point, Character>();
-        
-        for (int y = 0; y < lines.size(); y++) {
-            final var line = lines.get(y);
-            for (int x = 0; x < line.length(); x++) {
-                final var c = line.charAt(x);
-                map.put(new Point(x, y), c);
-            }
-        }
-        
-        return map;
     }
 }
