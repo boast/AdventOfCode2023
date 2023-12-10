@@ -29,8 +29,8 @@ public class Day10 {
         final var loop = getLoop(map);
         
         // Replace start with actual tile
-        final var startOut = loop.getFirst().directionOf(loop.get(1));
-        final var startIn  = loop.getFirst().directionOf(loop.getLast()).opposite();
+        final var startOut = loop.getFirst().directionOf(loop.get(1)).orElseThrow();
+        final var startIn  = loop.getFirst().directionOf(loop.getLast()).orElseThrow().opposite();
         final var startTile = Arrays.stream(Tile.values())
                                     .filter(tile -> tile.next(startIn) == startOut)
                                     .findFirst()
