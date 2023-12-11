@@ -17,6 +17,18 @@ public record Point(int x, int y) {
         );
     }
     
+    public int manhattanDistance(final Point other) {
+        return Math.abs(x - other.x) + Math.abs(y - other.y);
+    }
+    
+    public static int manhattanDistance(final Point a, final Point b) {
+        return a.manhattanDistance(b);
+    }
+    
+    public static int manhattanDistance(final Pair<Point> pair) {
+        return manhattanDistance(pair.first(), pair.second());
+    }
+    
     public Point up() {
         return new Point(x, y - 1);
     }
