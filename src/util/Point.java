@@ -4,6 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 public record Point(int x, int y) {
+    public static int manhattanDistance(final Point a, final Point b) {
+        return a.manhattanDistance(b);
+    }
+    
+    public static int manhattanDistance(final Pair<Point> pair) {
+        return manhattanDistance(pair.first(), pair.second());
+    }
+    
     public List<Point> neighbors() {
         return List.of(
                 new Point(x - 1, y - 1),
@@ -19,14 +27,6 @@ public record Point(int x, int y) {
     
     public int manhattanDistance(final Point other) {
         return Math.abs(x - other.x) + Math.abs(y - other.y);
-    }
-    
-    public static int manhattanDistance(final Point a, final Point b) {
-        return a.manhattanDistance(b);
-    }
-    
-    public static int manhattanDistance(final Pair<Point> pair) {
-        return manhattanDistance(pair.first(), pair.second());
     }
     
     public Point up() {
