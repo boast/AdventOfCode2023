@@ -27,25 +27,17 @@ public class Day14 {
             for (var x = 0; x < xMax; x++) {
                 final var tile = map.get(new Point(x, y));
                 if (tile == Tile.ROUND_ROCK) {
-                    //noinspection DuplicatedCode
-                    while (y > 0 && map.get(new Point(x, y - 1)) == Tile.EMPTY) {
-                        map.put(new Point(x, y), Tile.EMPTY);
-                        map.put(new Point(x, y - 1), Tile.ROUND_ROCK);
-                        y--;
+                    var currentY = y;
+                    while (currentY > 0 && map.get(new Point(x, currentY - 1)) == Tile.EMPTY) {
+                        map.put(new Point(x, currentY), Tile.EMPTY);
+                        map.put(new Point(x, currentY - 1), Tile.ROUND_ROCK);
+                        currentY--;
                     }
                 }
             }
         }
         
         return calculateLoad(yMax, map);
-    }
-    
-    private static long calculateLoad(final int yMax, final Map<Point, Tile> map) {
-        return map.entrySet()
-                  .stream()
-                  .filter(entry -> entry.getValue() == Tile.ROUND_ROCK)
-                  .mapToLong(entry -> yMax - entry.getKey().y())
-                  .sum();
     }
     
     static long part2(final List<String> lines) {
@@ -71,15 +63,24 @@ public class Day14 {
         return calculateLoad(yMax, map);
     }
     
+    private static long calculateLoad(final int yMax, final Map<Point, Tile> map) {
+        return map.entrySet()
+                  .stream()
+                  .filter(entry -> entry.getValue() == Tile.ROUND_ROCK)
+                  .mapToLong(entry -> yMax - entry.getKey().y())
+                  .sum();
+    }
+    
     private static void cycle(final Map<Point, Tile> map, final int xMax, final int yMax) {
         // Tilt up
         for (var y = 1; y < yMax; y++) {
             for (var x = 0; x < xMax; x++) {
                 if (map.get(new Point(x, y)) == Tile.ROUND_ROCK) {
-                    while (y > 0 && map.get(new Point(x, y - 1)) == Tile.EMPTY) {
-                        map.put(new Point(x, y), Tile.EMPTY);
-                        map.put(new Point(x, y - 1), Tile.ROUND_ROCK);
-                        y--;
+                    var currentY = y;
+                    while (currentY > 0 && map.get(new Point(x, currentY - 1)) == Tile.EMPTY) {
+                        map.put(new Point(x, currentY), Tile.EMPTY);
+                        map.put(new Point(x, currentY - 1), Tile.ROUND_ROCK);
+                        currentY--;
                     }
                 }
             }
@@ -89,10 +90,11 @@ public class Day14 {
         for (var x = 1; x < xMax; x++) {
             for (var y = 0; y < yMax; y++) {
                 if (map.get(new Point(x, y)) == Tile.ROUND_ROCK) {
-                    while (x > 0 && map.get(new Point(x - 1, y)) == Tile.EMPTY) {
-                        map.put(new Point(x, y), Tile.EMPTY);
-                        map.put(new Point(x - 1, y), Tile.ROUND_ROCK);
-                        x--;
+                    var currentX = x;
+                    while (currentX > 0 && map.get(new Point(currentX - 1, y)) == Tile.EMPTY) {
+                        map.put(new Point(currentX, y), Tile.EMPTY);
+                        map.put(new Point(currentX - 1, y), Tile.ROUND_ROCK);
+                        currentX--;
                     }
                 }
             }
@@ -102,10 +104,11 @@ public class Day14 {
         for (var y = yMax - 2; y >= 0; y--) {
             for (var x = 0; x < xMax; x++) {
                 if (map.get(new Point(x, y)) == Tile.ROUND_ROCK) {
-                    while (y < yMax - 1 && map.get(new Point(x, y + 1)) == Tile.EMPTY) {
-                        map.put(new Point(x, y), Tile.EMPTY);
-                        map.put(new Point(x, y + 1), Tile.ROUND_ROCK);
-                        y++;
+                    var currentY = y;
+                    while (currentY < yMax - 1 && map.get(new Point(x, currentY + 1)) == Tile.EMPTY) {
+                        map.put(new Point(x, currentY), Tile.EMPTY);
+                        map.put(new Point(x, currentY + 1), Tile.ROUND_ROCK);
+                        currentY++;
                     }
                 }
             }
@@ -115,10 +118,11 @@ public class Day14 {
         for (var x = xMax - 2; x >= 0; x--) {
             for (var y = 0; y < yMax; y++) {
                 if (map.get(new Point(x, y)) == Tile.ROUND_ROCK) {
-                    while (x < xMax - 1 && map.get(new Point(x + 1, y)) == Tile.EMPTY) {
-                        map.put(new Point(x, y), Tile.EMPTY);
-                        map.put(new Point(x + 1, y), Tile.ROUND_ROCK);
-                        x++;
+                    var currentX = x;
+                    while (currentX < xMax - 1 && map.get(new Point(currentX + 1, y)) == Tile.EMPTY) {
+                        map.put(new Point(currentX, y), Tile.EMPTY);
+                        map.put(new Point(currentX + 1, y), Tile.ROUND_ROCK);
+                        currentX++;
                     }
                 }
             }
