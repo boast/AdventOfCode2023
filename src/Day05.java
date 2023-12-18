@@ -14,7 +14,7 @@ public class Day05 {
     }
     
     static long part1(final List<String> lines) {
-        final var seeds   = Arrays.stream(lines.get(0).split(": ")[1].split(" ")).map(Long::parseLong).toList();
+        final var seeds   = Arrays.stream(lines.getFirst().split(": ")[1].split(" ")).map(Long::parseLong).toList();
         final var almanac = parseAlmanac(lines);
         
         return seeds.stream().map((seed) -> {
@@ -33,17 +33,17 @@ public class Day05 {
     }
     
     static long part2(final List<String> lines) {
-        final var seeds         = Arrays.stream(lines.get(0).split(": ")[1].split(" ")).map(Long::parseLong).toList();
-        final var initialRanges = new ArrayList<Range>();
+        final var seeds  = Arrays.stream(lines.getFirst().split(": ")[1].split(" ")).map(Long::parseLong).toList();
+        final var ranges = new ArrayList<Range>();
         
         for (int i = 0; i < seeds.size(); i += 2) {
-            initialRanges.add(new Range(seeds.get(i), seeds.get(i) + seeds.get(i + 1)));
+            ranges.add(new Range(seeds.get(i), seeds.get(i) + seeds.get(i + 1)));
         }
         
         final var almanac = parseAlmanac(lines);
         var       min     = Long.MAX_VALUE;
         
-        for (final var initialRange : initialRanges) {
+        for (final var initialRange : ranges) {
             var currentRanges = new ArrayList<Range>();
             currentRanges.add(initialRange);
             for (final var listMap : almanac) {

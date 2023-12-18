@@ -3,12 +3,16 @@ package util;
 import java.util.List;
 import java.util.Optional;
 
-public record Point(int x, int y) {
-    public static int manhattanDistance(final Point a, final Point b) {
+public record Point(long x, long y) {
+    public Point() {
+        this(0, 0);
+    }
+    
+    public static long manhattanDistance(final Point a, final Point b) {
         return a.manhattanDistance(b);
     }
     
-    public static int manhattanDistance(final Pair<Point> pair) {
+    public static long manhattanDistance(final Pair<Point> pair) {
         return manhattanDistance(pair.first(), pair.second());
     }
     
@@ -25,7 +29,7 @@ public record Point(int x, int y) {
         );
     }
     
-    public int manhattanDistance(final Point other) {
+    public long manhattanDistance(final Point other) {
         return Math.abs(x - other.x) + Math.abs(y - other.y);
     }
     
@@ -54,20 +58,39 @@ public record Point(int x, int y) {
         };
     }
     
+    public Point move(final Direction direction, final long distance) {
+        return switch (direction) {
+            case N -> new Point(x, y - distance);
+            case E -> new Point(x + distance, y);
+            case S -> new Point(x, y + distance);
+            case W -> new Point(x - distance, y);
+        };
+    }
+    
     public Optional<Direction> directionOf(final Point other) {
-        return Optional.ofNullable(switch (other.x - x) {
-            case 0 -> switch (other.y - y) {
+        final long diffX = other.x - x;
+        final long diffY = other.y - y;
+        
+        if (Math.abs(diffX) > 1 || Math.abs(diffY) > 1) {
+            return Optional.empty();
+        }
+        
+        final int diffXInt = (int) diffX;
+        final int diffYInt = (int) diffY;
+        
+        return Optional.ofNullable(switch (diffXInt) {
+            case 0 -> switch (diffYInt) {
                 case -1 -> Direction.N;
                 case 1 -> Direction.S;
                 default -> null;
             };
-            case -1 -> switch (other.y - y) {
+            case -1 -> switch (diffYInt) {
                 case 0 -> Direction.W;
                 case -1 -> Direction.N;
                 case 1 -> Direction.S;
                 default -> null;
             };
-            case 1 -> switch (other.y - y) {
+            case 1 -> switch (diffYInt) {
                 case 0 -> Direction.E;
                 case -1 -> Direction.N;
                 case 1 -> Direction.S;
@@ -83,6 +106,16 @@ public record Point(int x, int y) {
         S,
         W,
         ;
+        
+        public static Direction from(final String s) {
+            return switch (s) {
+                case "U" -> N;
+                case "R" -> E;
+                case "D" -> S;
+                case "L" -> W;
+                default -> throw new IllegalArgumentException("Invalid direction: " + s);
+            };
+        }
         
         public Direction opposite() {
             return switch (this) {
