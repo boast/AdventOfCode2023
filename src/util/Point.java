@@ -29,6 +29,15 @@ public record Point(long x, long y) {
         );
     }
     
+    public List<Point> adjacent() {
+        return List.of(
+                new Point(x - 1, y),
+                new Point(x, y - 1),
+                new Point(x, y + 1),
+                new Point(x + 1, y)
+        );
+    }
+    
     public long manhattanDistance(final Point other) {
         return Math.abs(x - other.x) + Math.abs(y - other.y);
     }
