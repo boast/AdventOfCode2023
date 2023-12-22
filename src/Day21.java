@@ -2,23 +2,23 @@ import util.Point;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Day21 {
     
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day21.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day21.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));
     }
     
     static long part1(final List<String> lines) {
-        final var xMax = lines.getFirst().length();
-        final var yMax = lines.size();
-        final var map  = parseMap(lines);
+        final var xMax  = lines.getFirst().length();
+        final var yMax  = lines.size();
+        final var map   = parseMap(lines);
         final var rocks = getRocks(map);
         
         var steps = getStartStepAsSet(map);
@@ -37,16 +37,16 @@ public class Day21 {
         // which must be quadratic.
         // To solve the quadratic growth, we measure the growth 3 times, each
         // when the step counter is at target % xMax (plus xMax).
-        final var xMax = lines.getFirst().length();
-        final var yMax = lines.size();
-        final var map  = parseMap(lines);
+        final var xMax  = lines.getFirst().length();
+        final var yMax  = lines.size();
+        final var map   = parseMap(lines);
         final var rocks = getRocks(map);
         
         final var target = 26501365;
         final var offset = target % xMax;
-        final var sizes = new ArrayList<Integer>();
-        var steps = getStartStepAsSet(map);
-        var i = 1;
+        final var sizes  = new ArrayList<Integer>();
+        var       steps  = getStartStepAsSet(map);
+        var       i      = 1;
         
         while (sizes.size() < 3) {
             steps = getNextSteps(steps, rocks, xMax, yMax);
@@ -73,10 +73,7 @@ public class Day21 {
     }
     
     private static Set<Point> getNextSteps(
-            final Set<Point> steps,
-            final Set<Point> rocks,
-            final int xMax,
-            final int yMax
+            final Set<Point> steps, final Set<Point> rocks, final int xMax, final int yMax
     ) {
         final var nextSteps = new HashSet<Point>();
         

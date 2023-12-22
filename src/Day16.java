@@ -2,7 +2,7 @@ import util.Point;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.List;
 public class Day16 {
     
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day16.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day16.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));

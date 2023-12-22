@@ -1,6 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Day12 {
@@ -10,7 +10,7 @@ public class Day12 {
     private static final Map<Candidate, Long> CACHE   = new HashMap<>();
     
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day12.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day12.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));

@@ -2,13 +2,13 @@ import util.Point;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Day03 {
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day03.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day03.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));
@@ -124,7 +124,9 @@ public class Day03 {
     }
     
     private enum Element {
-        NUMBER, SYMBOL, EMPTY;
+        NUMBER,
+        SYMBOL,
+        EMPTY;
         
         public static final Character EMPTY_ELEMENT = '.';
         public static final Character GEAR_ELEMENT  = '*';

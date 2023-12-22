@@ -2,7 +2,7 @@ import util.MathUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Day08 {
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day08.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day08.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));

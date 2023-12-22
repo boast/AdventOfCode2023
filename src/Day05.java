@@ -1,13 +1,13 @@
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Day05 {
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day05.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day05.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));

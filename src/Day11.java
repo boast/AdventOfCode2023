@@ -3,7 +3,7 @@ import util.Point;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import static util.Point.manhattanDistance;
 
 public class Day11 {
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day11.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day11.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));

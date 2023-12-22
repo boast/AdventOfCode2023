@@ -1,6 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -28,7 +28,7 @@ public class Day01 {
     );
     
     public static void main(final String[] args) throws IOException {
-        final var lines = Files.readAllLines(Paths.get("resources/day01.txt"));
+        final var lines = Files.readAllLines(Path.of("resources/day01.txt"));
         
         System.out.println(part1(lines));
         System.out.println(part2(lines));
@@ -48,7 +48,10 @@ public class Day01 {
     }
     
     static int part2(final List<String> lines) {
-        final var regex = "(\\d|%s)".formatted(digitsMap.keySet().stream().reduce((a, b) -> a + "|" + b).orElseThrow());
+        final var regex        = "(\\d|%s)".formatted(digitsMap.keySet()
+                                                               .stream()
+                                                               .reduce((a, b) -> a + "|" + b)
+                                                               .orElseThrow());
         final var patternFirst = Pattern.compile(regex);
         final var patternLast  = Pattern.compile(".*" + regex);
         
