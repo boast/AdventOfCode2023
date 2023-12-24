@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="tools.aqua.z3.turnkey" type="repository">
+    <properties maven-id="tools.aqua:z3-turnkey:4.12.2.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/z3-turnkey-4.12.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
