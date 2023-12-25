@@ -17,4 +17,8 @@ public record Pair<T>(T first, T second){
         }
         return pairs;
     }
+    
+    public static <T> Pair<T> reverse(final Pair<T> pair) {
+        return pair(pair.second(), pair.first());
+    }
 }
